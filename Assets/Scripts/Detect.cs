@@ -10,6 +10,7 @@ public class Detect : MonoBehaviour, ITrackableEventHandler
 
     protected TrackableBehaviour mTrackableBehaviour;
     private bool lightIsActive;
+    private bool firstTime;
 
     #endregion // PRIVATE_MEMBER_VARIABLES
 
@@ -28,6 +29,7 @@ public class Detect : MonoBehaviour, ITrackableEventHandler
         if (mTrackableBehaviour)
             mTrackableBehaviour.RegisterTrackableEventHandler(this);
 
+        firstTime = true;
         lightIsActive = false;
         player.SetActive(false);
     }
@@ -50,6 +52,7 @@ public class Detect : MonoBehaviour, ITrackableEventHandler
         {
             lightIsActive = true;
             player.SetActive(true);
+            if (firstTime) Initialize();
         }
         else
         {
@@ -61,4 +64,10 @@ public class Detect : MonoBehaviour, ITrackableEventHandler
     }
 
     #endregion // PUBLIC_METHODS
+
+    private void Initialize()
+    {
+        player.GetComponent<SphereController>().StartMovement();
+        firstTime = false;
+    }
 }

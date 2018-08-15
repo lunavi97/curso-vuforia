@@ -16,9 +16,13 @@ public class SphereController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         RectTransform rt = ground.GetComponent<RectTransform>();
         distanceToTheBorder = (rt.localScale.x * rt.sizeDelta.x) / 2;
-        rb.AddForce(horizontalAcceleration, 0, 0);
     }
 
+    public void StartMovement()
+    {
+        rb.AddForce(horizontalAcceleration, 0, 0);
+    }
+    
     private void FixedUpdate()
     {
         if (IsInRightBorder())
